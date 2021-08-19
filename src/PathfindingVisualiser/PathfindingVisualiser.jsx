@@ -14,16 +14,19 @@ import nodeStyles from "./Node/Node.module.css";
 
 export default function PathfindingVisualiser() {
   const [grid, setGrid] = useState(() => createGrid());
-  const [startNode, setStartNode] = useState(() => {
-    const node = grid[0][0];
-    node.isStart = true;
-    return node;
-  });
-  const [finishNode, setFinishNode] = useState(() => {
-    const node = grid[8][9];
-    node.isFinish = true;
-    return node;
-  });
+  const [startNode, setStartNode] = useState(null);
+  const [finishNode, setFinishNode] = useState(null);
+
+  useEffect(() => {
+    const startNode = grid[0][0];
+    startNode.isStart = true;
+    setStartNode(startNode);
+
+    const finishNode = grid[8][9];
+    finishNode.isFinish = true;
+    setFinishNode(finishNode);
+  }, [grid]);
+
   const [nodesInShortestPathOrder, setNodesInShortestPathOrder] = useState([]);
   const [visitedNodesInOrder, setVisitedNodesInOrder] = useState([]);
 
@@ -35,6 +38,17 @@ export default function PathfindingVisualiser() {
         : createRef()
     );
   });
+
+  const animateShortestPath = useCallback(() => {
+    if (nodesInShortestPathOrder.length === 1) return;
+    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
+      setTimeout(() => {
+        const { row, col } = nodesInShortestPathOrder[i];
+        const nodeRef = nodeRefs.current[row][col];
+        nodeRef.current.classList.add(nodeStyles.nodeShortestPath);
+      }, 50 * i);
+    }
+  }, [nodesInShortestPathOrder]);
 
   const animate = useCallback(() => {
     for (let i = 0; i < visitedNodesInOrder.length; i++) {
@@ -50,7 +64,7 @@ export default function PathfindingVisualiser() {
         nodeRef.current.classList.add(nodeStyles.nodeVisited);
       }, 10 * i);
     }
-  }, [nodesInShortestPathOrder, visitedNodesInOrder]);
+  }, [animateShortestPath, nodesInShortestPathOrder, visitedNodesInOrder]);
 
   useEffect(() => {
     animate(visitedNodesInOrder, nodesInShortestPathOrder);
@@ -62,9 +76,9 @@ export default function PathfindingVisualiser() {
   const [allowDiagonals, setAllowDiagonals] = useState(false);
 
   function visualiseDijkstra() {
-    const visitedNodesInOrder = dijkstra(grid, startNode, finishNode);
-    const nodesInShortestPathOrder = getNodesInShortestPathOrder(finishNode);
-    animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder);
+    setDisabledGrid(true);
+    setVisitedNodesInOrder(dijkstra(grid, startNode, finishNode));
+    setNodesInShortestPathOrder(getNodesInShortestPathOrder(finishNode));
   }
 
   function visualiseAStar() {
@@ -102,34 +116,18 @@ export default function PathfindingVisualiser() {
     setMouseIsPressed(false);
   }
 
-  function animateDijkstra(visitedNodesInOrder, nodesInShortestPathOrder) {
-    for (let i = 0; i < visitedNodesInOrder.length; i++) {
-      if (i === visitedNodesInOrder.length - 1) {
-        setTimeout(() => {
-          animateShortestPath(nodesInShortestPathOrder);
-        }, 10 * i);
-        return;
-      }
-      setTimeout(() => {
-        const { row, col } = visitedNodesInOrder[i];
-        const nodeRef = nodeRefs.current[row][col];
-        nodeRef.current.classList.add(nodeStyles.nodeVisited);
-      }, 10 * i);
-    }
-  }
-
-  function animateShortestPath(nodesInShortestPathOrder) {
-    if (nodesInShortestPathOrder.length === 1) return;
-    for (let i = 0; i < nodesInShortestPathOrder.length; i++) {
-      setTimeout(() => {
-        const { row, col } = nodesInShortestPathOrder[i];
-        const nodeRef = nodeRefs.current[row][col];
-        nodeRef.current.classList.add(nodeStyles.nodeShortestPath);
-      }, 50 * i);
-    }
-  }
-
   function resetGrid() {
+    nodesInShortestPathOrder.forEach((node) =>
+      nodeRefs.current[node.row][node.col].current.classList.remove(
+        nodeStyles.nodeShortestPath
+      )
+    );
+
+    visitedNodesInOrder.forEach((node) =>
+      nodeRefs.current[node.row][node.col].current.classList.remove(
+        nodeStyles.nodeVisited
+      )
+    );
     setGrid(createGrid());
   }
 
