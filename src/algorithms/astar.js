@@ -86,13 +86,3 @@ function getNeighbors(node, grid, allowDiagonals) {
 
   return neighbors.filter((neighbor) => !neighbor.isWall);
 }
-
-export function getNodesInShortestPathOrder(finishNode) {
-  const nodesInShortestPathOrder = [];
-  let currentNode = finishNode;
-  while (currentNode !== null) {
-    nodesInShortestPathOrder.unshift(currentNode);
-    currentNode = currentNode.previousNode;
-  }
-  return nodesInShortestPathOrder;
-}
