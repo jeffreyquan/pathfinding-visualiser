@@ -6,11 +6,29 @@
 }
 
 .nodeStart {
+  position: relative;
   background-color: green;
 }
 
+.nodeStart:before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  content: "🚀";
+}
+
 .nodeFinish {
+  position: relative;
   background-color: red;
+}
+
+.nodeFinish:before {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  content: "🪐";
 }
 
 .nodeVisited {
