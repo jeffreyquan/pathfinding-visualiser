@@ -1,5 +1,7 @@
 // https://en.wikipedia.org/wiki/A*_search_algorithm
 
+const SQUARE_ROOT_OF_TWO = Math.sqrt(2);
+
 export function astar(grid, startNode, finishNode, allowDiagonals = false) {
   const visitedNodesInOrder = [];
   startNode.gScore = 0;
@@ -51,13 +53,12 @@ function getNodeWithLowestScore(nodes) {
 }
 
 function heuristic(currentNode, finishNode, allowDiagonals) {
+  // http://theory.stanford.edu/~amitp/GameProgramming/Heuristics.html#diagonal-distance
+  const dx = Math.abs(finishNode.col - currentNode.col);
+  const dy = Math.abs(finishNode.row - currentNode.row);
   return allowDiagonals
-    ? Math.sqrt(
-        (finishNode.col - currentNode.col) ** 2 +
-          (finishNode.row - currentNode.row) ** 2
-      )
-    : Math.abs(finishNode.col - currentNode.col) +
-        Math.abs(finishNode.row - currentNode.row);
+    ? dx + dy + (SQUARE_ROOT_OF_TWO - 2) * Math.min(dx, dy)
+    : dx + dy;
 }
 
 function getNeighbors(node, grid, allowDiagonals) {
