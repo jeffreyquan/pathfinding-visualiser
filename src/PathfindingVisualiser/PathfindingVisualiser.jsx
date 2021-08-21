@@ -128,6 +128,7 @@ export default function PathfindingVisualiser() {
     }
 
     if (!startNode && !isFinishNode(row, col)) {
+      if (grid[row][col].isWall) return;
       toggleStartNode(grid, row, col, true);
       setStartNode(() => ({
         row,
@@ -143,6 +144,7 @@ export default function PathfindingVisualiser() {
     }
 
     if (!finishNode && !isStartNode(row, col)) {
+      if (grid[row][col].isWall) return;
       toggleFinishNode(grid, row, col, true);
       setFinishNode(() => ({
         row,
