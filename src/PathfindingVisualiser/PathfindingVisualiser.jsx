@@ -19,6 +19,7 @@ import {
   toggleFinishNode,
   toggleStartNode,
 } from "./helpers";
+import { generateMaze } from "../algorithms/generateMaze";
 
 // Initial Grid Constants
 const NO_OF_ROWS = 21;
@@ -215,6 +216,19 @@ export default function PathfindingVisualiser() {
       </button>
       <button onClick={() => visualiseAlgorithm(dijkstra)}>
         Visualise Dijkstra's Algorithm
+      </button>
+      <button
+        onClick={() => {
+          const gridWithMaze = generateMaze(
+            startNode,
+            finishNode,
+            NO_OF_ROWS,
+            NO_OF_COLS
+          );
+          setGrid(gridWithMaze);
+        }}
+      >
+        Generate Maze
       </button>
       <button onClick={() => resetPath()}>Reset Grid</button>
       <input
