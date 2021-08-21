@@ -265,6 +265,7 @@ export default function PathfindingVisualiser() {
         <h2>Controls</h2>
         <div className={styles.buttonGroup}>
           <Button
+            disabled={disabledGrid}
             color="primary"
             onClick={() => {
               resetPath();
@@ -273,7 +274,12 @@ export default function PathfindingVisualiser() {
           >
             Visualise
           </Button>
-          <Button outline color="secondary" onClick={() => setMaze()}>
+          <Button
+            disabled={disabledGrid}
+            outline
+            color="secondary"
+            onClick={() => setMaze()}
+          >
             Generate Maze
           </Button>
           <Button outline color="danger" onClick={() => reset()}>
