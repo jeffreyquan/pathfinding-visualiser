@@ -4,9 +4,9 @@ const SQUARE_ROOT_OF_TWO = Math.sqrt(2);
 
 export function astar(grid, startNode, finishNode, allowDiagonals = false) {
   const visitedNodesInOrder = [];
+  const openSet = [];
   startNode.gScore = 0;
   startNode.fScore = heuristic(startNode, finishNode);
-  let openSet = [];
   openSet.push(startNode);
   while (!!openSet.length) {
     const currentNode = getNodeWithLowestScore(openSet);
@@ -38,6 +38,7 @@ export function astar(grid, startNode, finishNode, allowDiagonals = false) {
       }
     }
   }
+
   return visitedNodesInOrder;
 }
 

@@ -1,3 +1,9 @@
 .grid {
-  margin: 100px 0 0;
+  margin: 100px 16px;
+}
+
+.row {
+  width: 100%;
+  display: grid;
+  grid-auto-flow: column;
 }
