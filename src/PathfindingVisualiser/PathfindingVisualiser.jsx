@@ -5,6 +5,7 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Button, Container, FormGroup, Input, Label, Row } from "reactstrap";
 import { dijkstra } from "../algorithms/dijkstra";
 import { astar } from "../algorithms/astar";
 import { getNodesInShortestPathOrder } from "../algorithms/utils";
@@ -43,6 +44,8 @@ export default function PathfindingVisualiser() {
   const [finishNode, setFinishNode] = useState(() =>
     setInitialNode(FINISH_NODE)
   );
+
+  const [algorithm, setAlgorithm] = useState("astar");
 
   const [nodesInShortestPathOrder, setNodesInShortestPathOrder] = useState([]);
   const [visitedNodesInOrder, setVisitedNodesInOrder] = useState([]);
@@ -93,16 +96,27 @@ export default function PathfindingVisualiser() {
 
   const [allowDiagonals, setAllowDiagonals] = useState(false);
 
-  function visualiseAlgorithm(algorithm) {
+  function visualiseAlgorithm() {
     setDisabledGrid(true);
-    setVisitedNodesInOrder(
-      algorithm(
-        grid,
-        grid[startNode.row][startNode.col],
-        grid[finishNode.row][finishNode.col],
-        allowDiagonals
-      )
-    );
+    if (algorithm === "astar") {
+      setVisitedNodesInOrder(
+        astar(
+          grid,
+          grid[startNode.row][startNode.col],
+          grid[finishNode.row][finishNode.col],
+          allowDiagonals
+        )
+      );
+    } else if (algorithm === "dijkstra") {
+      setVisitedNodesInOrder(
+        dijkstra(
+          grid,
+          grid[startNode.row][startNode.col],
+          grid[finishNode.row][finishNode.col],
+          allowDiagonals
+        )
+      );
+    }
     setNodesInShortestPathOrder(
       getNodesInShortestPathOrder(grid[finishNode.row][finishNode.col])
     );
@@ -209,35 +223,67 @@ export default function PathfindingVisualiser() {
     setFinishNode(setInitialNode(FINISH_NODE));
   }
 
+  function setMaze() {
+    resetShortestPath();
+    resetVisitedNodes();
+    setGrid(generateMaze(startNode, finishNode, NO_OF_ROWS, NO_OF_COLS));
+  }
+
   return (
-    <>
-      <button onClick={() => visualiseAlgorithm(astar)}>
-        Visualise A* Algorithm
-      </button>
-      <button onClick={() => visualiseAlgorithm(dijkstra)}>
-        Visualise Dijkstra's Algorithm
-      </button>
-      <button
-        onClick={() => {
-          const gridWithMaze = generateMaze(
-            startNode,
-            finishNode,
-            NO_OF_ROWS,
-            NO_OF_COLS
-          );
-          setGrid(gridWithMaze);
-        }}
-      >
-        Generate Maze
-      </button>
-      <button onClick={() => resetPath()}>Reset Grid</button>
-      <input
-        id="allowDiagonals"
-        type="checkbox"
-        value={allowDiagonals}
-        onChange={(e) => setAllowDiagonals(e.target.checked)}
-      />
-      <label htmlFor="allowDiagonals">Allow Diagonals</label>
+    <Container className={styles.container}>
+      <Row>
+        <FormGroup>
+          <Label for="algorithmSelect">
+            <h2>Select Algorithm</h2>
+          </Label>
+          <Input
+            type="select"
+            name="select"
+            id="algorithmSelect"
+            value={algorithm}
+            onChange={(e) => setAlgorithm(e.target.value)}
+          >
+            <option value="astar">A*</option>
+            <option value="dijkstra">Dijkstra</option>
+          </Input>
+        </FormGroup>
+      </Row>
+      <Row>
+        <FormGroup>
+          <Label check>
+            <Input
+              type="checkbox"
+              aria-label="Checkbox for allowing diagonals in paths"
+              value={allowDiagonals}
+              onChange={(e) => setAllowDiagonals(e.target.checked)}
+            />{" "}
+            Allow Diagonals
+          </Label>
+        </FormGroup>
+      </Row>
+      <Row>
+        <h2>Controls</h2>
+        <div className={styles.buttonGroup}>
+          <Button
+            color="primary"
+            onClick={() => {
+              resetPath();
+              visualiseAlgorithm();
+            }}
+          >
+            Visualise
+          </Button>
+          <Button outline color="secondary" onClick={() => setMaze()}>
+            Generate Maze
+          </Button>
+          <Button outline color="danger" onClick={() => reset()}>
+            Clear Board
+          </Button>
+          <Button outline color="warning" onClick={() => resetPath()}>
+            Clear Path
+          </Button>
+        </div>
+      </Row>
       <div className={styles.grid}>
         {grid.map((row, rowIndex) => (
           <div key={rowIndex} className={styles.row}>
@@ -261,6 +307,6 @@ export default function PathfindingVisualiser() {
           </div>
         ))}
       </div>
-    </>
+    </Container>
   );
 }

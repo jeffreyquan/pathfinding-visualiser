@@ -1,0 +1,39 @@
+.wall {
+  background-color: rgb(12, 53, 71);
+}
+
+.shortestPath {
+  background-color: rgb(255, 254, 106);
+}
+
+.start {
+  background-color: green;
+}
+
+.finish {
+  background-color: red;
+}
+
+.visited {
+  background-color: rgba(0, 190, 218, 0.75);
+}
+
+.legend {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(70px, 1fr));
+}
+
+.legend > div {
+  display: flex;
+  align-items: center;
+}
+
+.legend > div div {
+  height: 20px;
+  width: 20px;
+  margin-right: 8px;
+}
+
+.legend > div p {
+  margin-bottom: 0;
+}

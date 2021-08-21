@@ -1,5 +1,12 @@
+.container {
+}
+
+.container > div {
+  margin-bottom: 16px;
+}
+
 .grid {
-  margin: 100px 16px;
+  margin: 32px auto;
 }
 
 .row {
@@ -8,4 +15,27 @@
   margin: 0 auto;
   display: grid;
   grid-auto-flow: column;
+}
+
+.buttonGroup {
+  display: flex;
+}
+
+.buttonGroup button:not(:last-child) {
+  margin-right: 16px;
+}
+
+label {
+  cursor: pointer;
+}
+
+@media only screen and (max-width: 525px) {
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .buttonGroup button:not(:last-child) {
+    margin-right: 0;
+    margin-bottom: 16px;
+  }
 }

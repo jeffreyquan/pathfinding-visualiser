@@ -1,0 +1,13 @@
+.root {
+  max-width: 525px;
+  margin: 0 auto;
+}
+
+.title {
+  margin-bottom: 32px;
+}
+
+h1 {
+  padding-left: 12px;
+  padding-right: 12px;
+}
