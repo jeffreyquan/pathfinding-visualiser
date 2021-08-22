@@ -281,6 +281,7 @@ export default function PathfindingVisualiser() {
         <h2 className={styles.subheading}>Controls</h2>
         <div className={styles.buttonGroup}>
           <Button
+            size="sm"
             disabled={disabledGrid || disableButton()}
             color="primary"
             onClick={() => {
@@ -292,6 +293,7 @@ export default function PathfindingVisualiser() {
             Visualise
           </Button>
           <Button
+            size="sm"
             disabled={disabledGrid || disableButton()}
             outline
             color="secondary"
@@ -300,6 +302,7 @@ export default function PathfindingVisualiser() {
             Create Maze
           </Button>
           <Button
+            size="sm"
             disabled={disableButton()}
             outline
             color="danger"
@@ -308,6 +311,7 @@ export default function PathfindingVisualiser() {
             Clear Board
           </Button>
           <Button
+            size="sm"
             disabled={disableButton()}
             outline
             color="warning"
