@@ -6,3 +6,7 @@
 .scoreboard > div:first-child {
   margin-right: 16px;
 }
+
+.scoreboard > div {
+  text-align: center;
+}

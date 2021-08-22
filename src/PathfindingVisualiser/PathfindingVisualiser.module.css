@@ -18,24 +18,15 @@
 }
 
 .buttonGroup {
-  display: flex;
-}
-
-.buttonGroup button:not(:last-child) {
-  margin-right: 16px;
+  display: grid;
+  grid-gap: 16px;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 0.5fr));
 }
 
 label {
   cursor: pointer;
 }
 
-@media only screen and (max-width: 525px) {
-  .buttonGroup {
-    flex-direction: column;
-  }
-
-  .buttonGroup button:not(:last-child) {
-    margin-right: 0;
-    margin-bottom: 16px;
-  }
+.subheading {
+  font-size: 20px;
 }

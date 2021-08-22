@@ -249,7 +249,7 @@ export default function PathfindingVisualiser() {
       <Row>
         <FormGroup>
           <Label for="algorithmSelect">
-            <h2>Select Algorithm</h2>
+            <h2 className={styles.subheading}>Select Algorithm</h2>
           </Label>
           <Input
             type="select"
@@ -278,7 +278,7 @@ export default function PathfindingVisualiser() {
         </FormGroup>
       </Row>
       <Row>
-        <h2>Controls</h2>
+        <h2 className={styles.subheading}>Controls</h2>
         <div className={styles.buttonGroup}>
           <Button
             disabled={disabledGrid || disableButton()}
@@ -297,7 +297,7 @@ export default function PathfindingVisualiser() {
             color="secondary"
             onClick={() => setMaze()}
           >
-            Generate Maze
+            Create Maze
           </Button>
           <Button
             disabled={disableButton()}
