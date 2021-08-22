@@ -1,70 +1,69 @@
-# Getting Started with Create React App
+# Pathfinding Visualiser
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of Contents
 
-## Available Scripts
+- [Live Demo](#demo)
+- [Introduction](#introduction)
+- [How to get started](#how-to-get-started)
+- [Technologies](#technologies)
+- [Key Features](#key-features)
+- [Future Developments](#future-developments)
 
-In the project directory, you can run:
+<a name="demo"></a>
 
-### `yarn start`
+## Live Demo
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+[Pathfinding Visualiser](https://jeffreyquan.github.io/pathfinding-visualiser/)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+<a name="introduction"></a>
 
-### `yarn test`
+## Introduction
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This project is designed to visualise pathfinding algorithms.
 
-### `yarn build`
+Currently, it incorporates the following algorithms:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- [A\*](https://en.wikipedia.org/wiki/A*_search_algorithm)
+- [Dijkstra](https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+It was inspired by [Clément Mihailescu](https://github.com/clementmihailescu) who has a tutorial on how to get started with this project:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- [YouTube](https://www.youtube.com/watch?v=msttfIHHkak&ab_channel=Cl%C3%A9mentMihailescu)
+- [Github Repo](https://github.com/clementmihailescu/Pathfinding-Visualizer-Tutorial)
 
-### `yarn eject`
+<a name="how-to-get-started"></a>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## How to get started
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+After cloning:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+1. Run `npm install` and
+2. Run `npm run start`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+<a name="technologies"></a>
 
-## Learn More
+## Technologies
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [React](https://reactjs.org/)
+- [reactstrap](https://reactstrap.github.io/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Followed [How to deploy React App to GitHub Pages](https://dev.to/yuribenjamin/how-to-deploy-react-app-in-github-pages-2a1f)
 
-### Code Splitting
+<a name="key-features"></a>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+## Key Feaures
 
-### Analyzing the Bundle Size
+- **Visualise the cells visited by the algorithm**
+- **Visualise the shortest path**
+- **Move start and finish node** - click on the start or finish node to place them in another position
+- **Place walls** - click on empty cells to place walls
+- **Generate maze** - generate random mazes
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+<a name="future-developments"></a>
 
-### Making a Progressive Web App
+## Future Developments
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Adding more algorithms
+- Able to add weights
+- Adjust speed of pathfinding
+- Adjust grid sizing
