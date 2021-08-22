@@ -96,8 +96,18 @@ export default function PathfindingVisualiser() {
 
   const [allowDiagonals, setAllowDiagonals] = useState(false);
 
+  const [disabledDiagonals, setDisabledDiagonals] = useState(false);
+
+  useEffect(() => {
+    if (algorithm === "dijkstra") {
+      setAllowDiagonals(false);
+      setDisabledDiagonals(true);
+    }
+
+    if (algorithm === "astar") setDisabledDiagonals(false);
+  }, [algorithm]);
+
   function visualiseAlgorithm() {
-    setDisabledGrid(true);
     if (algorithm === "astar") {
       setVisitedNodesInOrder(
         astar(
@@ -120,6 +130,7 @@ export default function PathfindingVisualiser() {
     setNodesInShortestPathOrder(
       getNodesInShortestPathOrder(grid[finishNode.row][finishNode.col])
     );
+    setDisabledGrid(false);
   }
 
   function isStartNode(row, col) {
@@ -252,6 +263,7 @@ export default function PathfindingVisualiser() {
         <FormGroup>
           <Label check>
             <Input
+              disabled={disabledDiagonals}
               type="checkbox"
               aria-label="Checkbox for allowing diagonals in paths"
               value={allowDiagonals}
