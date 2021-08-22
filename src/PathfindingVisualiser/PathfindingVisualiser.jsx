@@ -281,10 +281,11 @@ export default function PathfindingVisualiser() {
         <h2>Controls</h2>
         <div className={styles.buttonGroup}>
           <Button
-            disabled={disabledGrid | disableButton()}
+            disabled={disabledGrid || disableButton()}
             color="primary"
             onClick={() => {
               resetPath();
+              setDisabledGrid(true);
               visualiseAlgorithm();
             }}
           >

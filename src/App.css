@@ -4,10 +4,17 @@
 }
 
 .title {
-  margin-bottom: 32px;
+  margin-bottom: 16px;
+}
+
+.link {
+  padding: 0 12px;
+  margin-bottom: 12px;
+  text-align: center;
 }
 
 h1 {
   padding-left: 12px;
   padding-right: 12px;
+  text-align: center;
 }
