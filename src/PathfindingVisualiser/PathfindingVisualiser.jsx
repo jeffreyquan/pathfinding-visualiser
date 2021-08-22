@@ -21,6 +21,7 @@ import {
   toggleStartNode,
 } from "./helpers";
 import { generateMaze } from "../algorithms/generateMaze";
+import Scoreboard from "./Scoreboard";
 
 // Initial Grid Constants
 const NO_OF_ROWS = 21;
@@ -130,7 +131,6 @@ export default function PathfindingVisualiser() {
     setNodesInShortestPathOrder(
       getNodesInShortestPathOrder(grid[finishNode.row][finishNode.col])
     );
-    setDisabledGrid(false);
   }
 
   function isStartNode(row, col) {
@@ -240,6 +240,10 @@ export default function PathfindingVisualiser() {
     setGrid(generateMaze(startNode, finishNode, NO_OF_ROWS, NO_OF_COLS));
   }
 
+  function disableButton() {
+    return startNode === null || finishNode === null;
+  }
+
   return (
     <Container className={styles.container}>
       <Row>
@@ -277,7 +281,7 @@ export default function PathfindingVisualiser() {
         <h2>Controls</h2>
         <div className={styles.buttonGroup}>
           <Button
-            disabled={disabledGrid}
+            disabled={disabledGrid | disableButton()}
             color="primary"
             onClick={() => {
               resetPath();
@@ -287,20 +291,42 @@ export default function PathfindingVisualiser() {
             Visualise
           </Button>
           <Button
-            disabled={disabledGrid}
+            disabled={disabledGrid || disableButton()}
             outline
             color="secondary"
             onClick={() => setMaze()}
           >
             Generate Maze
           </Button>
-          <Button outline color="danger" onClick={() => reset()}>
+          <Button
+            disabled={disableButton()}
+            outline
+            color="danger"
+            onClick={() => reset()}
+          >
             Clear Board
           </Button>
-          <Button outline color="warning" onClick={() => resetPath()}>
+          <Button
+            disabled={disableButton()}
+            outline
+            color="warning"
+            onClick={() => resetPath()}
+          >
             Clear Path
           </Button>
         </div>
+      </Row>
+      <Row>
+        <Scoreboard
+          numberVisited={
+            visitedNodesInOrder.length > 0 ? visitedNodesInOrder.length : "N/A"
+          }
+          numberShortestPath={
+            nodesInShortestPathOrder.length > 0
+              ? nodesInShortestPathOrder.length
+              : "N/A"
+          }
+        />
       </Row>
       <div className={styles.grid}>
         {grid.map((row, rowIndex) => (
